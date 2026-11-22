@@ -15,11 +15,15 @@ class MainWindow(QWidget):
 
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.title = Title()
+        self.configuration = Configuration()
+        self.switch = Switch()
         # ---------------------------- #
-        layout.addWidget(Title())
-        layout.addWidget(Configuration())
+        layout.addWidget(self.title)
+        layout.addWidget(self.configuration)
         layout.addStretch()
-        layout.addWidget(Switch())
+        layout.addWidget(self.switch)
         # ---------------------------- #
 
         self.setLayout(layout)
