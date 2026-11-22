@@ -1,13 +1,8 @@
-# from PySide6.QtCore import QUrl
-# from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
-# from PySide6.QtMultimediaWidgets import QVideoWidget
-# from PySide6.QtGui import QMovie
-
-
-import random
+from random import randint
 
 from PySide6.QtCore import QObject, QTimer
 
+from admonitio.overlay import Overlay
 from admonitio.widgets.configuration import Configuration
 from admonitio.widgets.switch import Switch
 
@@ -16,6 +11,7 @@ class Reminder(QObject):
     def __init__(self, switch: Switch, configuration: Configuration):
         super().__init__()
 
+        self.overlay = Overlay()
         self.configuration = configuration
         self.switch = switch
         self.timer = QTimer(self)
@@ -30,7 +26,7 @@ class Reminder(QObject):
             self.interval = self.configuration.intervals.interval.value() * 1000
         else:
             self.timer.setSingleShot(True)
-            self.interval = random.randint(1000, 3_600_000)
+            self.interval = randint(1000, 3_600_000)
 
         self.timer.start(self.interval)
 
