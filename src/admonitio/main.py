@@ -1,17 +1,12 @@
 import sys
 
-from PySide6.QtWidgets import QApplication, QLabel, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QApplication
+
+from admonitio.window import MainWindow
 
 app = QApplication(sys.argv)
 
-window = QWidget()
-window.setWindowTitle("Admonitio")
-window.resize(400, 400)
+window = MainWindow()
 window.show()
-
-layout = QVBoxLayout(window)
-label = QLabel("hello world")
-layout.addWidget(label)
-
 
 sys.exit(app.exec())
