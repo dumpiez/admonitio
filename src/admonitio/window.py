@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QVBoxLayout, QWidget
 
-from admonitio.widgets.events import Events
-from admonitio.widgets.intervals import Intervals
+from admonitio.widgets.configuration import Configuration
 from admonitio.widgets.title import Title
 
 
@@ -14,8 +13,7 @@ class MainWindow(QWidget):
 
         layout = QVBoxLayout()
         layout.addWidget(Title())
-        layout.addWidget(Intervals())
-        layout.addWidget(Events())
+        layout.addWidget(Configuration())
         layout.addStretch()
 
         self.setLayout(layout)
