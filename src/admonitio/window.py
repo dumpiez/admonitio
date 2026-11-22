@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QVBoxLayout, QWidget
 
-from admonitio.widgets.helloworld import HelloWorldWidget
+from admonitio.widgets.title import Title
 
 
 class MainWindow(QWidget):
@@ -11,6 +11,6 @@ class MainWindow(QWidget):
         self.resize(400, 300)
 
         layout = QVBoxLayout()
-        layout.addWidget(HelloWorldWidget())
+        layout.addWidget(Title())
 
         self.setLayout(layout)

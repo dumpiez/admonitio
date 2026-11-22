@@ -19,7 +19,12 @@ requires = ["uv_build>=0.13.8,<0.14.0"]
 build-backend = "uv_build"
 
 [tool.basedpyright]
-extraPaths = ["src"]
 typeCheckingMode = "standard"
+useLibraryCodeForTypes = true
 venvPath = "."
 venv = ".venv"
+include = ["src"]
+exclude = [
+    "**/__pycache__",
+    "**/.venv",
+]
