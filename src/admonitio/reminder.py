@@ -17,11 +17,10 @@ class Reminder(QObject):
         self.configuration = configuration
         self.switch = switch
         self.timer = QTimer(self)
+        self.timer.setSingleShot(True)
+        self.timer.timeout.connect(self.remind)
 
     def trigger(self):
-        self.timer.timeout.connect(self.remind)
-        self.timer.setSingleShot(True)
-
         is_fixed = self.configuration.intervals.button.currentIndex() == 1
 
         if is_fixed:
@@ -32,8 +31,11 @@ class Reminder(QObject):
 
         self.timer.start(self.interval)
 
-    def stop(self):
+    def end(self):
         self.timer.stop()
 
     def remind(self):
-        print("test")
+        # if interval mode is set to random, then generate
+        # new interval before running the event
+        if not self.configuration.intervals.button.currentIndex():
+            self.trigger()

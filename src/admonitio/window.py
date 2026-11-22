@@ -1,4 +1,4 @@
-from PySide6.QtCore import QTimer, Qt, Slot
+from PySide6.QtCore import Qt, QTimer, Slot
 from PySide6.QtWidgets import QVBoxLayout, QWidget
 
 from admonitio.reminder import Reminder
@@ -41,4 +41,4 @@ class MainWindow(QWidget):
 
     @Slot()
     def stopEvent(self):
-        self.reminder.stop()
+        self.reminder.end()
