@@ -13,17 +13,21 @@ from admonitio.widgets.switch import Switch
 
 
 class Reminder(QObject):
-    def trigger(self, switch: Switch, configuration: Configuration):
+    def __init__(self, switch: Switch, configuration: Configuration):
+        self.configuration = configuration
+        self.switch = switch
         self.timer = QTimer(self)
+
+    def trigger(self):
         self.timer.timeout.connect(self.timeout)
         self.timer.setSingleShot(True)
 
-        is_fixed = configuration.intervals.button.currentIndex() == 1
+        is_fixed = self.configuration.intervals.button.currentIndex() == 1
 
         if is_fixed:
             self.timer.setSingleShot(False)
             # self.minutes = configuration.intervals.interval.value() * 60000
-            self.minutes = configuration.intervals.interval.value() * 1000
+            self.minutes = self.configuration.intervals.interval.value() * 1000
             self.timer.start(self.minutes)
         else:
             self.timer.start(random.randint(1000, 3_600_000))
