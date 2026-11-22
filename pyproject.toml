@@ -21,7 +21,6 @@ build-backend = "uv_build"
 [tool.basedpyright]
 extraPaths = ["src"]
 typeCheckingMode = "standard"
-useLibraryCodeForTypes = true
 venvPath = "."
 venv = ".venv"
 include = ["src"]
