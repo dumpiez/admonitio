@@ -1,6 +1,7 @@
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QTimer, Qt, Slot
 from PySide6.QtWidgets import QVBoxLayout, QWidget
 
+from admonitio.reminder import Reminder
 from admonitio.widgets.configuration import Configuration
 from admonitio.widgets.switch import Switch
 from admonitio.widgets.title import Title
@@ -19,6 +20,9 @@ class MainWindow(QWidget):
         self.title = Title()
         self.configuration = Configuration()
         self.switch = Switch()
+        self.reminder = Reminder()
+        self.timer = QTimer(self)
+
         # ---------------------------- #
         layout.addWidget(self.title)
         layout.addWidget(self.configuration)
@@ -27,3 +31,14 @@ class MainWindow(QWidget):
         # ---------------------------- #
 
         self.setLayout(layout)
+
+        self.switch.start_button.clicked.connect(self.startEvent)
+        self.switch.stop_button.clicked.connect(self.stopEvent)
+
+    @Slot()
+    def startEvent(self):
+        self.reminder.trigger(self.switch, self.configuration)
+
+    @Slot()
+    def stopEvent(self):
+        self.reminder.stop()
