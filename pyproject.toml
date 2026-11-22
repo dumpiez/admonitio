@@ -1,7 +1,7 @@
 [project]
 name = "admonitio"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.0.1"
+description = "an application that runs in the background that constantly reminds you at random times to get you to stay productive"
 readme = "README.md"
 authors = [
     { name = "dumpiez", email = "nightlypie@gmail.com" }
