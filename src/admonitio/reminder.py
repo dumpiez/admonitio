@@ -6,20 +6,23 @@
 
 import random
 
-from PySide6.QtCore import QTimer
+from PySide6.QtCore import QObject, QTimer
 
 from admonitio.widgets.configuration import Configuration
 from admonitio.widgets.switch import Switch
 
 
-class Reminder:
+class Reminder(QObject):
     def trigger(self, switch: Switch, configuration: Configuration):
-        self.timer = QTimer()
+        self.timer = QTimer(self)
         self.timer.timeout.connect(self.timeout)
+        self.timer.setSingleShot(True)
 
-        is_fixed = configuration.intervals.button.currentIndex()
+        is_fixed = configuration.intervals.button.currentIndex() == 1
 
         if is_fixed:
+            self.timer.setSingleShot(False)
+            # self.minutes = configuration.intervals.interval.value() * 60000
             self.minutes = configuration.intervals.interval.value() * 1000
             self.timer.start(self.minutes)
         else:
