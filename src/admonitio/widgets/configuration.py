@@ -9,7 +9,10 @@ class Configuration(QWidget):
         super().__init__()
 
         layout = QHBoxLayout()
-        layout.addWidget(Intervals(), 1)
-        layout.addWidget(Events(), 1)
+        intervals = Intervals()
+        events = Events()
+
+        layout.addWidget(intervals, 1)
+        layout.addWidget(events, 1)
 
         self.setLayout(layout)
