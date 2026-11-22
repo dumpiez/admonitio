@@ -20,7 +20,7 @@ class MainWindow(QWidget):
         self.title = Title()
         self.configuration = Configuration()
         self.switch = Switch()
-        self.reminder = Reminder()
+        self.reminder = Reminder(self.switch, self.configuration)
         self.timer = QTimer(self)
 
         # ---------------------------- #
@@ -37,7 +37,7 @@ class MainWindow(QWidget):
 
     @Slot()
     def startEvent(self):
-        self.reminder.trigger(self.switch, self.configuration)
+        self.reminder.trigger()
 
     @Slot()
     def stopEvent(self):
