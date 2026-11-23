@@ -12,6 +12,7 @@ class Media(QWidget):
         self.setWindowFlags(
             Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint
         )
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
         self.ASSETS_DIR = Path(__file__).resolve().parents[2] / "assets"
         self.GIF_PATH = self.ASSETS_DIR / "jumpscare_single.gif"
