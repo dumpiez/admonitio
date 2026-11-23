@@ -13,11 +13,12 @@ class Media(QWidget):
         )
 
         self.ASSETS_DIR = Path(__file__).resolve().parents[2] / "assets"
-        self.GIF_PATH = self.ASSETS_DIR / "jumpscare.gif"
+        self.GIF_PATH = self.ASSETS_DIR / "jumpscare_single.gif"
 
         self.label = QLabel()
         self.movie = QMovie(str(self.GIF_PATH))
         self.label.setMovie(self.movie)
+        self.label.setScaledContents(True)
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -26,6 +27,3 @@ class Media(QWidget):
     def play(self):
         self.showFullScreen()
         self.movie.start()
-
-        print("GIF valid:", self.movie.isValid())
-        print("GIF valid:", str(self.ASSETS_DIR))
