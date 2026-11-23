@@ -9,7 +9,7 @@ class Events(QWidget):
         self.label = QLabel("Event Type")
 
         self.button = QComboBox()
-        self.button.addItems(["Audio", "Image", "Audio and Image"])
+        self.button.addItems(["Audio", "Video", "Audio and Video"])
 
         layout = QVBoxLayout(self)
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)

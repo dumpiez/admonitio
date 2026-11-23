@@ -2,7 +2,7 @@ from random import randint
 
 from PySide6.QtCore import QObject, QTimer
 
-from admonitio.overlay import Overlay
+from admonitio.events import Events
 from admonitio.widgets.configuration import Configuration
 from admonitio.widgets.switch import Switch
 
@@ -11,7 +11,7 @@ class Reminder(QObject):
     def __init__(self, switch: Switch, configuration: Configuration):
         super().__init__()
 
-        self.overlay = Overlay()
+        self.events = Events()
         self.configuration = configuration
         self.switch = switch
         self.timer = QTimer(self)
@@ -22,10 +22,14 @@ class Reminder(QObject):
 
         if is_fixed:
             self.timer.setSingleShot(False)
+
+            # FIXED INTERVAL CONFIGURATION
             # self.minutes = configuration.intervals.interval.value() * 60000
             self.interval = self.configuration.intervals.interval.value() * 1000
         else:
             self.timer.setSingleShot(True)
+
+            # RANDOM INTERVAL CONFIGURATION
             self.interval = randint(1000, 3_600_000)
 
         self.timer.start(self.interval)
