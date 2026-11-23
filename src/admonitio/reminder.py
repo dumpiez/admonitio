@@ -2,7 +2,7 @@ from random import randint
 
 from PySide6.QtCore import QObject, QTimer
 
-from admonitio.events import Events
+from admonitio.media import Media
 from admonitio.widgets.configuration import Configuration
 from admonitio.widgets.switch import Switch
 
@@ -11,7 +11,7 @@ class Reminder(QObject):
     def __init__(self, switch: Switch, configuration: Configuration):
         super().__init__()
 
-        self.events = Events()
+        self.media = Media()
         self.configuration = configuration
         self.switch = switch
         self.timer = QTimer(self)
@@ -38,7 +38,7 @@ class Reminder(QObject):
         self.timer.stop()
 
     def remind(self):
-        print("hello")
+        self.media.play()
 
         # if interval mode is set to random, then generate
         # new interval
