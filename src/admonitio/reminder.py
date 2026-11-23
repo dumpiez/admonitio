@@ -28,7 +28,7 @@ class Reminder(QObject):
             self.timer.setSingleShot(False)
 
             # FIXED INTERVAL CONFIGURATION
-            self.minutes = self.configuration.intervals.interval.value() * 60000
+            self.interval = self.configuration.intervals.interval.value() * 60000
 
             # for debugging purposes
             # self.interval = self.configuration.intervals.interval.value() * 1000
