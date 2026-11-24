@@ -19,8 +19,8 @@ at random (or set!) intervals, an event will play to remind you to get back to w
 ### technologies used
 
 - **Python3** as the main programming language
-  - **PySide6** as a binding to build the graphical interface
-- **Qt** as the main technology used for the graphical interface
+  - **PySide6** as a binding for *Qt*
+- **Qt** as the main technology used
 
 ## configuring
 

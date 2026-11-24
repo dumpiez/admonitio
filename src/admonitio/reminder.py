@@ -36,11 +36,11 @@ class Reminder(QObject):
 
             # RANDOM INTERVAL CONFIGURATION
 
-            # default interval
+            # default interval - range is 1 second to 1 hour
             # self.interval = randint(1000, 3_600_000)
 
-            # for debugging purposes
-            self.interval = randint(1000, 10000)  # 1 to 10 seconds
+            # for debugging purposes - range is 1 to 10 seconds
+            self.interval = randint(1000, 10000)
 
         self.timer.start(self.interval)
 
