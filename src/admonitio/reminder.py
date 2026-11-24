@@ -28,15 +28,22 @@ class Reminder(QObject):
             self.timer.setSingleShot(False)
 
             # FIXED INTERVAL CONFIGURATION
-            self.interval = self.configuration.intervals.interval.value() * 60000
+
+            # default interval
+            # self.interval = self.configuration.intervals.interval.value() * 60000
 
             # for debugging purposes
-            # self.interval = self.configuration.intervals.interval.value() * 1000
+            self.interval = self.configuration.intervals.interval.value() * 1000
         else:
             self.timer.setSingleShot(True)
 
             # RANDOM INTERVAL CONFIGURATION
-            self.interval = randint(1000, 3_600_000)
+
+            # default interval
+            # self.interval = randint(1000, 3_600_000)
+
+            # for debugging purposes
+            self.interval = randint(1000, 10000)
 
         self.timer.start(self.interval)
 
@@ -44,6 +51,7 @@ class Reminder(QObject):
         self.timer.stop()
 
     def remind(self):
+        # print("Time Elapsed: ", self.interval)
         self.media.play()
 
         # if interval mode is set to random, then generate
