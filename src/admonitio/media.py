@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 
 from PySide6.QtGui import QMovie, Qt
@@ -16,10 +17,15 @@ class Media(QWidget):
         )
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
-        self.ASSETS_DIR = Path(__file__).resolve().parents[2] / "assets"
-        self.GIF_PATH = self.ASSETS_DIR / "jumpscare_single.gif"
         self.events = event
         self.event_type = self.events.button.currentIndex()
+
+        # check whether its running pyinstaller or development
+        if getattr(sys, "frozen", False):
+            self.ASSETS_DIR = Path(sys._MEIPASS) / "assets"
+        else:
+            self.ASSETS_DIR = Path(__file__).resolve().parents[2] / "assets"
+        self.GIF_PATH = self.ASSETS_DIR / "jumpscare_single.gif"
 
         # VIDEO STUFFS
         self.label = QLabel()
