@@ -26,6 +26,7 @@ class MainWindow(QWidget):
         self.timer = QTimer(self)
         self.tray = QSystemTrayIcon(self)
 
+        # -------- TRAY SETTINGS ------ #
         open_app = QAction("Open Admonitio", self)
         open_app.triggered.connect(self.show)
 
@@ -37,9 +38,11 @@ class MainWindow(QWidget):
         menu.addAction(quit_app)
 
         self.tray.setContextMenu(menu)
+        self.tray.setToolTip("Admonitio")
         self.tray.show()
-
         # ---------------------------- #
+
+        # -------- APP LAYOUT -------- #
         layout.addWidget(self.title)
         layout.addWidget(self.configuration)
         layout.addStretch()
@@ -51,6 +54,7 @@ class MainWindow(QWidget):
         self.switch.start_button.clicked.connect(self.startEvent)
         self.switch.stop_button.clicked.connect(self.stopEvent)
 
+    # Replace default closeEvent, which is to quit the application altogether
     def closeEvent(self, event):
         event.ignore()
         self.hide()

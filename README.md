@@ -40,12 +40,12 @@ is 1 hour)
 events have three options you can set it to:
 
 1. audio: plays an audio everytime an event is triggered
-2. video: plaus a video everytime an event is triggered
-3. both: plays an audio and video everytime an event is
+2. gif: plays a gif everytime an event is triggered
+3. both: plays an audio and gif everytime an event is
 triggered
 
-you can replace the audio and video to something of your liking,
-or just use the available preset
+you can replace the audio and gif to something of your liking,
+or just use the default
 
 ## running the application
 

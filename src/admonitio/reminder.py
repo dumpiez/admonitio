@@ -18,9 +18,6 @@ class Reminder(QObject):
         self.event_type = self.configuration.events.button.currentIndex()
         self.media = Media(self.configuration.events)
 
-    def update_event_type(self):
-        self.event_type = self.configuration.events.button.currentIndex()
-
     def trigger(self):
         is_fixed = self.configuration.intervals.button.currentIndex() == 1
 
@@ -29,10 +26,10 @@ class Reminder(QObject):
 
             # FIXED INTERVAL CONFIGURATION
 
-            # default interval
+            # default interval - turns interval into minutes
             # self.interval = self.configuration.intervals.interval.value() * 60000
 
-            # for debugging purposes
+            # for debugging purposes - turns interval into seconds
             self.interval = self.configuration.intervals.interval.value() * 1000
         else:
             self.timer.setSingleShot(True)
@@ -43,7 +40,7 @@ class Reminder(QObject):
             # self.interval = randint(1000, 3_600_000)
 
             # for debugging purposes
-            self.interval = randint(1000, 10000)
+            self.interval = randint(1000, 10000)  # 1 to 10 seconds
 
         self.timer.start(self.interval)
 
