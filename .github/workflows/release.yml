@@ -8,6 +8,10 @@ on:
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
+    env:
+      UV_PYTHON_PREFERENCE: only-managed
     strategy:
       fail-fast: false
       matrix:
@@ -16,10 +20,11 @@ jobs:
             artifact_name: admonitio-windows
             binary_path: dist/admonitio/admonitio.exe
           - os: ubuntu-latest
+            container: quay.io/pypa/manylinux_2_28_x86_64
             artifact_name: admonitio-linux
             binary_path: dist/admonitio/admonitio
 
-    runs-on: ${{ matrix.os }}
+
 
     steps:
       - name: Checkout code
@@ -28,7 +33,7 @@ jobs:
       - name: Set up uv and Install Python
         uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d
         with:
-          python-version: "3.14"
+          python-version: "3.12"
           python-arch: "x86_64"
 
       - name: Install dependencies

@@ -2,5 +2,3 @@ __pycache__/
 *.py[cod]
 build/
 dist/
-main.spec
-admonitio.spec

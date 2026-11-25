@@ -1,14 +1,14 @@
 [project]
 name = "admonitio"
-version = "0.0.1"
+version = "0.1.0"
 description = "an application that runs in the background that constantly reminds you at random times to get you to stay productive"
 readme = "README.md"
 authors = [
     { name = "dumpiez", email = "nightlypie@gmail.com" }
 ]
-requires-python = ">=3.14"
+requires-python = ">=3.12"
 dependencies = [
-    "pyside6>=6.12.0",
+    "pyside6<6.10",
 ]
 
 [project.scripts]
