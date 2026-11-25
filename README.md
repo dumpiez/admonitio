@@ -60,7 +60,7 @@ and download the executable file!
 
 #### prerequisites
 
-- python: `3.14` or higher
+- python: `3.12` or higher
 - uv: `0.13.8` until `0.14.0`
 - git: for version control!
 
