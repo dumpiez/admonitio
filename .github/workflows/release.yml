@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
     strategy:
       fail-fast: false
       matrix:
@@ -16,10 +18,11 @@ jobs:
             artifact_name: admonitio-windows
             binary_path: dist/admonitio/admonitio.exe
           - os: ubuntu-latest
+            container: quay.io/pypa/manylinux_2_28_x86_64
             artifact_name: admonitio-linux
             binary_path: dist/admonitio/admonitio
 
-    runs-on: ${{ matrix.os }}
+
 
     steps:
       - name: Checkout code
