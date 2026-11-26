@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QApplication, QMenu, QSystemTrayIcon, QVBoxLayout,
 
 from admonitio.reminder import Reminder
 from admonitio.widgets.configuration import Configuration
+from admonitio.widgets.settings import Settings
 from admonitio.widgets.switch import Switch
 from admonitio.widgets.title import Title
 
@@ -22,6 +23,7 @@ class MainWindow(QWidget):
         self.title = Title()
         self.configuration = Configuration()
         self.switch = Switch()
+        self.settings = Settings()
         self.reminder = Reminder(self.switch, self.configuration)
         self.timer = QTimer(self)
         self.tray = QSystemTrayIcon(self)
@@ -46,6 +48,7 @@ class MainWindow(QWidget):
         layout.addWidget(self.title)
         layout.addWidget(self.configuration)
         layout.addStretch()
+        layout.addWidget(self.settings)
         layout.addWidget(self.switch)
         # ---------------------------- #
 
