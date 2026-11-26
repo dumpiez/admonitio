@@ -6,10 +6,11 @@ from PySide6.QtMultimedia import QAudioOutput, QMediaPlayer
 from PySide6.QtWidgets import QLabel, QVBoxLayout, QWidget
 
 from admonitio.widgets.events import Events
+from admonitio.widgets.settings import Settings
 
 
 class Media(QWidget):
-    def __init__(self, event: Events):
+    def __init__(self, event: Events, settings: Settings):
         super().__init__()
 
         self.setWindowFlags(
@@ -17,15 +18,26 @@ class Media(QWidget):
         )
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
 
+        self.settings = settings
         self.events = event
         self.event_type = self.events.button.currentIndex()
 
+        self.GIF_PATH = None
+        self.AUDIO_PATH = None
+
+        if self.settings.gif_path:
+            self.GIF_PATH = Path(self.settings.gif_path)
+        if self.settings.audio_path:
+            self.AUDIO_PATH = self.settings.audio_path
+
         # check whether its running pyinstaller or development
         if getattr(sys, "frozen", False):
-            self.ASSETS_DIR = Path(sys._MEIPASS) / "assets"
+            self.ASSETS_DIR = Path(sys._MEIPASS) / "assets"  # pyright: ignore[reportAttributeAccessIssue]
         else:
             self.ASSETS_DIR = Path(__file__).resolve().parents[2] / "assets"
-        self.GIF_PATH = self.ASSETS_DIR / "jumpscare_single.gif"
+
+        if not self.GIF_PATH:
+            self.GIF_PATH = self.ASSETS_DIR / "jumpscare_single.gif"
 
         # VIDEO STUFFS
         self.label = QLabel()
@@ -40,7 +52,9 @@ class Media(QWidget):
         # AUDIO STUFFS
         self.player = QMediaPlayer(self)
         self.audio = QAudioOutput(self)
-        self.AUDIO_PATH = self.ASSETS_DIR / "jumpscare.mp3"
+
+        if not self.AUDIO_PATH:
+            self.AUDIO_PATH = self.ASSETS_DIR / "jumpscare.mp3"
         self.player.setSource(str(self.AUDIO_PATH))
 
         self.player.setAudioOutput(self.audio)

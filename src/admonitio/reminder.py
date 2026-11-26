@@ -4,19 +4,23 @@ from PySide6.QtCore import QObject, QTimer
 
 from admonitio.media import Media
 from admonitio.widgets.configuration import Configuration
+from admonitio.widgets.settings import Settings
 from admonitio.widgets.switch import Switch
 
 
 class Reminder(QObject):
-    def __init__(self, switch: Switch, configuration: Configuration):
+    def __init__(
+        self, switch: Switch, configuration: Configuration, settings: Settings
+    ):
         super().__init__()
 
+        self.settings = settings
         self.configuration = configuration
         self.switch = switch
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.remind)
         self.event_type = self.configuration.events.button.currentIndex()
-        self.media = Media(self.configuration.events)
+        self.media = Media(self.configuration.events, self.settings)
 
     def trigger(self):
         is_fixed = self.configuration.intervals.button.currentIndex() == 1

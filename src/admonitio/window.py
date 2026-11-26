@@ -24,7 +24,7 @@ class MainWindow(QWidget):
         self.configuration = Configuration()
         self.switch = Switch()
         self.settings = Settings()
-        self.reminder = Reminder(self.switch, self.configuration)
+        self.reminder = Reminder(self.switch, self.configuration, self.settings)
         self.timer = QTimer(self)
         self.tray = QSystemTrayIcon(self)
 

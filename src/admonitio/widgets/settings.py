@@ -12,6 +12,9 @@ class Settings(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.gif_path = None
+        self.audio_path = None
+
         self.tray_toggle = QCheckBox("Minimize to system tray")
         self.tray_toggle.setChecked(True)
 
@@ -29,18 +32,18 @@ class Settings(QWidget):
 
     @Slot()
     def open_gif_picker(self):
-        file_path, _ = QFileDialog.getOpenFileName(
+        self.gif_path, _ = QFileDialog.getOpenFileName(
             self, "Select a GIF file", "", "GIF (*.gif)"
         )
 
-        if file_path:
-            print(f"{file_path}")
+        if self.gif_path:
+            print(f"{self.gif_path}")
 
     @Slot()
     def open_audio_picker(self):
-        file_path, _ = QFileDialog.getOpenFileName(
+        self.audio_path, _ = QFileDialog.getOpenFileName(
             self, "Select an Audio File", "", "Audio (*.mp3 *.m4a *.aac *.ogg *.wav)"
         )
 
-        if file_path:
-            print(f"{file_path}")
+        if self.audio_path:
+            print(f"{self.audio_path}")
