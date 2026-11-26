@@ -12,7 +12,9 @@ class Settings(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.tray_toggle = QCheckBox("Minimze to system tray")
+        self.tray_toggle = QCheckBox("Minimize to system tray")
+        self.tray_toggle.setChecked(True)
+
         self.gif_picker = QPushButton("Change GIF")
         self.audio_picker = QPushButton("Change Audio")
 

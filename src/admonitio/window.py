@@ -18,8 +18,8 @@ class MainWindow(QWidget):
 
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        menu = QMenu()
 
+        self.menu = QMenu()
         self.title = Title()
         self.configuration = Configuration()
         self.switch = Switch()
@@ -35,13 +35,13 @@ class MainWindow(QWidget):
         quit_app = QAction("Quit", self)
         quit_app.triggered.connect(QApplication.quit)
 
-        menu.addAction(open_app)
-        menu.addSeparator()
-        menu.addAction(quit_app)
+        self.menu.addAction(open_app)
+        self.menu.addSeparator()
+        self.menu.addAction(quit_app)
 
-        self.tray.setContextMenu(menu)
+        self.tray.setContextMenu(self.menu)
         self.tray.setToolTip("Admonitio")
-        self.tray.show()
+        self.tray.setVisible(self.settings.tray_toggle.isChecked())
         # ---------------------------- #
 
         # -------- APP LAYOUT -------- #
@@ -56,11 +56,17 @@ class MainWindow(QWidget):
 
         self.switch.start_button.clicked.connect(self.startEvent)
         self.switch.stop_button.clicked.connect(self.stopEvent)
+        self.settings.tray_toggle.checkStateChanged.connect(
+            self.toggle_disappear_into_tray
+        )
 
-    # Replace default closeEvent, which is to quit the application altogether
     def closeEvent(self, event):
-        event.ignore()
-        self.hide()
+        if self.settings.tray_toggle.isChecked():
+            event.ignore()
+            self.hide()
+        else:
+            event.accept()
+            QApplication.quit()
 
     @Slot()
     def startEvent(self):
@@ -69,3 +75,10 @@ class MainWindow(QWidget):
     @Slot()
     def stopEvent(self):
         self.reminder.end()
+
+    @Slot()
+    def toggle_disappear_into_tray(self):
+        if self.settings.tray_toggle.isChecked():
+            self.tray.show()
+        else:
+            self.tray.hide()
